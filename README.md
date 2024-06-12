@@ -6,7 +6,6 @@
    <a href="https://huggingface.co/datasets/imirandam/TROHN-Text"> TROHN-Text Dataset </a> |
    <a href="https://huggingface.co/datasets/imirandam/TROHN-Img"> TROHN-Img Dataset </a> |
    <a href=""> Paper </a> |
-   <a href="./src/CLIP_fine_tuning/ckpt"> Model Checkpoints </a> |
 </p>
 
 This is the official implementation for the paper BiVLC: Extending Vision-Language Compositionality Evaluation with Text-to-Image Retrieval
@@ -17,7 +16,7 @@ WORK IN PROGRESS!
 
 ## Results
 
-## Code Structure
+## Repository Structure
 
 ```
 ├── source_data                               # Directory for source data
@@ -30,21 +29,23 @@ WORK IN PROGRESS!
 │   │   └── BiVLC_img_generation.py           # Image generation
 │   ├── Training_data                         # Train and val data generation
 │   │   ├── TROHN-Text                        # TROHN-Text data generation
-│   │   │   ├── data                          # Generated negative captions
+│   │   │   ├── data                          # Folder to save generated negative captions
 │   │   │   └── TROHN_Text_generation.py      # Negative caption generation 
 │   │   └── TROHN-Img                         # TROHN-Img data generation
-│   │   │   ├── data                          # Scored negative captions
+│   │   │   ├── data                          # Folder to save the scored negative captions
+│   │   │   ├── imgs                          # Folder to save generated negative images
 │   │   │   ├── adversarial_refine.py         # Adversarial refinement from SugarCrepe
 │   │   │   ├── TROHN_Img_scoring.py          # Scoring TROHN-Text negative captions
 │   │   │   ├── TROHN_Img_best_selection.py   # Selecting best negative captions
 │   │   │   └── TROHN_Img_generation.py       # Image generation
 │   ├── CLIP_fine_tuning                      # CLIP fine-tuning code and ckpts
-│   │   ├── ckpt                              # CLIP Checkpoints
+│   │   ├── ckpt                              # Folder to save the CLIP Checkpoints
 │   │   ├── CLIP_fine_tuning.py               # CLIP fine-tuning
 │   │   ├── CLIP_utils.py                     # load model, load data, evaluations
 │   │   └── scheduler.py                      # Cosine scheduler from OpenCLIP
 │   ├── Detectors                             # Detectors training and evaluation
-│   │   ├── classifier_ckpt                   # Classifier checkpoints
+│   │   ├── results                           # Detector results csv
+│   │   ├── classifier_ckpt                   # Folder to save the classifier checkpoints
 │   │   ├── Detector_img_classifier.py        # Training img detector
 │   │   ├── Detector_text_classifier.py       # Training text detector
 │   │   ├── Detector_evaluation_BiVLC.py      # BiVLC detector evaluation
@@ -52,21 +53,31 @@ WORK IN PROGRESS!
 │   │   └── Detector_utils.py                 # load model, load data
 ├── main_evaluation_BiVLC.py                  # Main evaluation 
 ├── evaluation_SugarCrepe.py                  # SugarCrepe evaluation
+├── results                                   # BiVLC and SugarCrepe results
 └── requirements.txt                          # List of libraries needed
-
 ```
 
-## Instructions for replicating the results
+## Preparing environment, data and checkpoints
+
 ### Create Python Environment
 
 ```
-venv BiVLC                        # Create env
+git clone https://github.com/IMirandaM/BiVLC.git
+
+cd BiVLC
+
+python -m venv BiVLC              # Create env
 source BiVLC/bin/activate         # Load env
 
 pip install -r requirements.txt   # Install dependencies
 ```
 
 ### Download source data
+
+This section provides instructions for downloading all the data needed to reproduce the results of the paper.
+
+**IMPORTAN:** If you want to evaluate only BiVLC there is no need to download any data. If you want to evaluate SugarCrepe you need to download the SugarCrepe json files and the COCO 2017 Val images. If you want to reproduce the whole implementation, download all the data.
+
 
 #### COCO 2017
 Download the COCO 2017 data from the official website, https://cocodataset.org/#download.
@@ -91,7 +102,57 @@ Then we concatenate the 7 json files into a single CSV.
 python source_data/SugarCrepe/concat_SugarCrepe.py
 ```
 
+### Download checkpoints
+
+Model checkpoints are hosted in HuggingFace repositories. You only need to download the .pt files.
+
+#### CLIP Fine-tuning
+We have fine-tuned three different CLIP models. Download the .pt files from the following links, we recommend saving them in the following folder src/CLIP_fine_tuning/ckpt.
+
+1. [CLIP_COCO](https://huggingface.co/imirandam/CLIP_COCO/tree/main)
+2. [CLIP_TROHN-Text](https://huggingface.co/imirandam/CLIP_TROHN-Text/tree/main)
+3. [CLIP_TROHN-Img](https://huggingface.co/imirandam/CLIP_TROHN-Img/tree/main)
+
+#### Detectors
+
+We have trained two detectors. Download the best_image and best_text .pt files from the following links, we recommend saving them in the following folder src/Detectors/classifier_ckpt.
+
+1. [CLIP_Detector](https://huggingface.co/imirandam/CLIP_Detector/tree/main)
+2. [CLIP_TROHN-Img_Detector](https://huggingface.co/imirandam/CLIP_TROHN-Img_Detector/tree/main)
+
+### Evaluation
+
+This section will show how to reproduce evaluations in BiVLC and SugarCrepe datasets.
+
+#### Main evaluation BiVLC
+
+```
+python main_evaluation_BiVLC.py \
+--model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
+--run_name 'CLIP_TROHN-Img'
+```
+
+**Note:** In the above example we only evaluate CLIP_TROHN-Img, to evaluate any other model just change the --model-checkpoint argument and add a --run_name to identify it. 
+
+We provide the checkpoints of our models in HuggingFace repositories (See Download checkpoints section above), for [NegCLIP](https://github.com/mertyg/vision-language-models-are-bows) and [GNM](https://github.com/ugorsahin/Generative-Negative-Mining) models you should download their checkpoints directly from their official repositories. To evalute the baseline model simply do not add the --model-checkpoint argument.
+
+#### Evaluate in SugarCrepe
+
+To evaluate the different models in SugarCrepe change the model checkpoints and run names as in the BiVLC evaluation.
+
+```
+python evaluation_SugarCrepe.py \
+--model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
+--run_name 'CLIP_TROHN-Img'
+```
+
+## Instructions for replicating data generation, CLIP fine-tuning and Detectors
+
+In this section we present instructions for replicating the data generation, fine-tuning of the CLIP models and training of the detectors.
+
 ### Data generation
+
+The data generation is divided into two parts, on the one hand the generation of the BiVLC benchmark and on the other hand, the training data sets, TROHN-Text and TROHN-Img.
 
 #### BiVLC
 
@@ -104,7 +165,7 @@ accelerate launch --num_processes=4 src/BiVLC_Generation/BiVLC_img_generation.py
 
 #### TROHN-Text
 
-To create TROHN-Text we have used the COCO 2017 train captions, using OpenChat 3.5-0106 and the templates provided by Sugarcrepe. We have created a negative caption for the proposed subcategories in SugarCrepe for each of the COCO 2017 train captions.
+To create TROHN-Text we have used the COCO 2017 train captions, the LLM OpenChat 3.5-0106 and the templates provided by Sugarcrepe. We have created a negative caption for the proposed subcategories in SugarCrepe for each of the COCO 2017 train captions.
 
 ```
 python src/Training_data/TROHN_Text/TROHN_Text_generation.py
@@ -112,7 +173,7 @@ python src/Training_data/TROHN_Text/TROHN_Text_generation.py
 
 #### TROHN-Img
 
-To create TROHN-Img we used the captions generated for TROHN-Text. As image generation requires a lot of computational power and time, we filtered the negative captions based on plausibility and linguistic acceptability scores to obtain the best ones.
+To create TROHN-Img we used the negative captions generated for TROHN-Text. As image generation requires a lot of computational power and time, we filtered the negative captions based on plausibility and linguistic acceptability scores to obtain the best ones.
 
 ```
 python src/Training_data/TROHN_Img/TROHN_Img_scoring.py
@@ -152,7 +213,6 @@ python src/Detectors/Detector_img_classifier.py \
 --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
 --run_name 'CLIP_TROHN-Img'
 ```
-
 **Note:** To train with the baseline model encoders simply do not add the --model-checkpoint argument.
 
 ```
@@ -170,12 +230,12 @@ python src/Detectors/Detector_evaluation_BiVLC.py \
 --run_name 'CLIP_TROHN-Img'
 ```
 
-**Note:** In the previous example we evaluated the model based on the CLIP_TROHN-Img encoders, to evaluate the detector with the baseline encoders change the image-checkpoint and text-checkpoint by the checkpoints provided in [classifier ckpt](./src/Detectors/classifier_ckpt).
+**Note:** In the previous example we evaluated the model based on the CLIP_TROHN-Img encoders, to evaluate the detector with the baseline encoders change the image-checkpoint and text-checkpoint provides in the HuggingFace repository (See Download checkpoints section above).
 
 ```
 python src/Detectors/Detector_evaluation_BiVLC.py \
---image-checkpoint 'src/Detectors/classifier_ckpt/best_image_C_VIT-B-32_DPO_0.pt' \
---text-checkpoint 'src/Detectors/classifier_ckpt/best_text_C_VIT-B-32_7.pt' \
+--image-checkpoint 'src/Detectors/classifier_ckpt/best_image_VIT-B-32_0.pt' \
+--text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
 --run_name 'CLIP_baseline'
 ```
 
@@ -192,29 +252,8 @@ As when evaluating in BiVLC, to evaluate the detector with the baseline model en
 
 ```
 python src/Detectors/Detector_evaluation_SugarCrepe.py \
---text-checkpoint 'src/Detectors/classifier_ckpt/best_text_C_VIT-B-32_7.pt' \
+--text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
 --run_name 'CLIP_baseline'
-```
-
-### Evaluation
-#### Main evaluation BiVLC
-
-```
-python main_evaluation_BiVLC.py \
---model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
---run_name 'CLIP_TROHN-Img'
-```
-
-**Note:** In the above example we only evaluate CLIP_TROHN-Img, to evaluate any other model just change the --model-checkpoint argument and add a --run_name to identify it. In the [ckpt folder](./src/CLIP_fine_tuning/ckpt), we provide the checkpoints of our models, for [NegCLIP](https://github.com/mertyg/vision-language-models-are-bows) and [GNM](https://github.com/ugorsahin/Generative-Negative-Mining) models you should download their checkpoints directly from their official repositories. To evalute the baseline model simply do not add the --model-checkpoint argument.
-
-#### Evaluate in SugarCrepe
-
-To evaluate the different models in SugarCrepe change the model checkpoints and run names as in the BiVLC evaluation.
-
-```
-python evaluation_SugarCrepe.py \
---model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
---run_name 'CLIP_TROHN-Img'
 ```
 
 ## License
