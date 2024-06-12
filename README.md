@@ -112,7 +112,7 @@ If you need training and validation data, you can use the datasets proposed in t
 │   │   ├── CLIP_utils.py                     # load model, load data, evaluations
 │   │   └── scheduler.py                      # Cosine scheduler from OpenCLIP
 │   ├── Detectors                             # Detectors training and evaluation
-│   │   ├── results                           # Detector results csv
+│   │   ├── results                           # Detector results
 │   │   ├── classifier_ckpt                   # Folder to save the classifier checkpoints
 │   │   ├── Detector_img_classifier.py        # Training img detector
 │   │   ├── Detector_text_classifier.py       # Training text detector
@@ -144,7 +144,7 @@ pip install -r requirements.txt   # Install dependencies
 
 This section provides instructions for downloading all the data needed to reproduce the results of the paper.
 
-**IMPORTAN:** If you want to evaluate only BiVLC there is no need to download any data. If you want to evaluate SugarCrepe you need to download the SugarCrepe json files and the COCO 2017 Val images. If you want to reproduce the whole implementation, download all the data.
+**IMPORTANT:** If you want to evaluate only BiVLC there is no need to download any data. If you want to evaluate SugarCrepe you need to download the SugarCrepe json files and the COCO 2017 Val images. If you want to reproduce the whole implementation, download all the data.
 
 
 #### COCO 2017
