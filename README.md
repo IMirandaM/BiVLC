@@ -12,11 +12,79 @@ This is the official implementation for the paper BiVLC: Extending Vision-Langua
 
 WORK IN PROGRESS!
 
-## Examples
+## Dataset Description
+- **Homepage:** https://imirandam.github.io/BiVLC_project_page/
+- **Repository:** https://github.com/IMirandaM/BiVLC
+- **Paper:**
+- **Point of Contact:** [Imanol Miranda](mailto:imanol.miranda@ehu.eus)
+
+### Dataset Summary
+
+BiVLC is a benchmark for Bidirectional Vision-Language Compositionality evaluation. Each instance consists of two images and two captions. Using each of the images and captions as a base, a model is asked to select the pair that correctly represents the base versus the hard negative distractor with minor compositional changes. Thus, we can measure image-to-text and text-to-image retrieval with hard negative pairs. To obtain good results on the dataset, it is necessary that the model performs well in both directions for the same instance.
+
+<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Examples.png">
+
+#### Dataset instances
+
+Each instance of the dataset consists of six fields:
+* image: COCO 2017 validation image.
+* caption: COCO 2017 validation text describing the COCO image.
+* negative_caption: Negative caption generated from the COCO 2017 validation text description by SUGARCREPE.
+* negative_image: Negative image generated from the negative caption by BiVLC.
+* type: Category of the negative instances: Replace, Swap or Add.
+* subtype: Subcategory of the negative instances: Object, Attribute or Relation.
+
+#### How to use 
+
+To load data with datasets:
+```python
+>>> data = load_dataset("imirandam/BiVLC", split = "test")
+```
+
+#### Instance example
+
+Each instance has the following structure:
+```
+{
+    'image': <PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=500x332 at 0x7F9BFC0C5430>,
+    'caption': 'A man throwing a ball while smiling and on a field.',
+    'negative_caption': 'A man throwing a ball while a child is smiling on a field.',
+    'negative_image': <PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=512x512 at 0x7F9BE45571C0>,
+    'type': 'add',
+    'subtype': 'obj',
+}
+```
+
+### Dataset statistics
+test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instances, 50% text-to-image and 50% image-to-text.
+
+<img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.png">
+
+
+### Source Data
+- image and caption are from COCO 2017 validation split.
+- negative_caption is a text description generated from the COCO caption by SUGARCREPE.
+  
+### Dataset curation
+<img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Process.png">
+
+Step 1 - Uniformly format positive and hard negative captions
+
+Step 2 - Generate hard negative images
+
+Step 3 - Ask to human annotators to choose the best generated image
+
+Step 4 - Filter ambiguous instances
+
+### More examples
+<img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/more_examples.png">
+  
+### Training Data
+If you need training and validation data, you can use the datasets proposed in the paper in the following links, [TROHN-Text](https://huggingface.co/datasets/imirandam/TROHN-Text) and [TORHN-Img](https://huggingface.co/datasets/imirandam/TROHN-Img).
 
 ## Results
 
-## Repository Structure
+## Code Structure
 
 ```
 ├── source_data                               # Directory for source data
