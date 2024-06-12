@@ -12,11 +12,7 @@ This is the official implementation for the paper BiVLC: Extending Vision-Langua
 
 WORK IN PROGRESS!
 
-## Dataset Description
-- **Homepage:** https://imirandam.github.io/BiVLC_project_page/
-- **Repository:** https://github.com/IMirandaM/BiVLC
-- **Paper:**
-- **Point of Contact:** [Imanol Miranda](mailto:imanol.miranda@ehu.eus)
+## BiVLC dataset
 
 ### Dataset Summary
 
