@@ -57,7 +57,7 @@ Each instance has the following structure:
 test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instances, 50% text-to-image and 50% image-to-text.
 
 <p align="center">
-  <img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.png">
+  <img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.svg">
 </p>
 
 
