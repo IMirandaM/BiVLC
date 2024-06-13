@@ -12,8 +12,6 @@
 
 This is the official implementation for the paper BiVLC: Extending Vision-Language Compositionality Evaluation with Text-to-Image Retrieval
 
-WORK IN PROGRESS!
-
 ## BiVLC dataset
 
 ### Dataset Summary
@@ -64,8 +62,8 @@ test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instan
 
 
 ### Source Data
-- image and caption are from COCO 2017 validation split.
-- negative_caption is a text description generated from the COCO caption by SugarCrepe.
+- image and caption are from [COCO 2017](https://cocodataset.org/#home) validation split.
+- negative_caption is a text description generated from the COCO caption by [SugarCrepe](https://github.com/RAIVNLab/sugar-crepe).
   
 ### Dataset curation
 <p align="center">
