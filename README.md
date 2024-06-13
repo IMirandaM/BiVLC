@@ -2,10 +2,12 @@
 
 <p align="center">
    <a href="https://imirandam.github.io/BiVLC_project_page"> Project Page </a> |
+   <a href=""> Paper </a> |
+   <a href="https://huggingface.co/collections/imirandam/bivlc-665f496b7cf372c7a06dc57c"> BiVLC Collection </a> |
    <a href="https://huggingface.co/datasets/imirandam/BiVLC"> BiVLC Dataset </a> |
    <a href="https://huggingface.co/datasets/imirandam/TROHN-Text"> TROHN-Text Dataset </a> |
    <a href="https://huggingface.co/datasets/imirandam/TROHN-Img"> TROHN-Img Dataset </a> |
-   <a href=""> Paper </a> |
+   
 </p>
 
 This is the official implementation for the paper BiVLC: Extending Vision-Language Compositionality Evaluation with Text-to-Image Retrieval
