@@ -184,11 +184,11 @@ We have trained two detectors. Download the best_image and best_text .pt files f
 1. [CLIP_Detector](https://huggingface.co/imirandam/CLIP_Detector/tree/main)
 2. [CLIP_TROHN-Img_Detector](https://huggingface.co/imirandam/CLIP_TROHN-Img_Detector/tree/main)
 
-### Evaluation
+## Evaluation
 
 This section will show how to reproduce evaluations in BiVLC and SugarCrepe datasets.
 
-#### Main evaluation BiVLC
+### Main evaluation BiVLC
 
 ```
 python main_evaluation_BiVLC.py \
@@ -200,7 +200,7 @@ python main_evaluation_BiVLC.py \
 
 We provide the checkpoints of our models in HuggingFace repositories (See Download checkpoints section above), for [NegCLIP](https://github.com/mertyg/vision-language-models-are-bows) and [GNM](https://github.com/ugorsahin/Generative-Negative-Mining) models you should download their checkpoints directly from their official repositories. To evalute the baseline model simply do not add the --model-checkpoint argument.
 
-#### Evaluate in SugarCrepe
+### Evaluate in SugarCrepe
 
 To evaluate the different models in SugarCrepe change the model checkpoints and run names as in the BiVLC evaluation.
 
