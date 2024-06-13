@@ -125,7 +125,7 @@ If you need training and validation data, you can use the datasets proposed in t
 
 ### Create Python Environment
 
-```
+```python
 git clone https://github.com/IMirandaM/BiVLC.git
 
 cd BiVLC
@@ -162,7 +162,7 @@ Download SugarCrepe data in BiVLC/source_data/SugarCrepe from the official repos
 
 Then we concatenate the 7 json files into a single CSV.
 
-```
+```python
 python source_data/SugarCrepe/concat_SugarCrepe.py
 ```
 
@@ -184,13 +184,21 @@ We have trained two detectors. Download the best_image and best_text .pt files f
 1. [CLIP_Detector](https://huggingface.co/imirandam/CLIP_Detector/tree/main)
 2. [CLIP_TROHN-Img_Detector](https://huggingface.co/imirandam/CLIP_TROHN-Img_Detector/tree/main)
 
+**NOTE:** Alternatively you can download the checkpoints using HuggingFace-hub:
+
+```python
+from huggingface_hub import hf_hub_download
+
+hf_hub_download(repo_id="imirandam/CLIP_COCO", filename="best_CLIP_COCO_9.pt", local_dir = "./ckpt")
+```
+
 ## Evaluation
 
 This section will show how to reproduce evaluations in BiVLC and SugarCrepe datasets.
 
 ### Main evaluation BiVLC
 
-```
+```python
 python main_evaluation_BiVLC.py \
 --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
 --run_name 'CLIP_TROHN-Img'
@@ -204,7 +212,7 @@ We provide the checkpoints of our models in HuggingFace repositories (See Downlo
 
 To evaluate the different models in SugarCrepe change the model checkpoints and run names as in the BiVLC evaluation.
 
-```
+```python
 python evaluation_SugarCrepe.py \
 --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
 --run_name 'CLIP_TROHN-Img'
@@ -222,7 +230,7 @@ The data generation is divided into two parts, on the one hand the generation of
 
 To create BiVLC we relied on SugarCrepe negative captions and created 4 images for each caption with SD-XL model. Then, through two phases of crowdsourcing, we kept the best images (see dataset curation section).
 
-```
+```python
 accelerate launch --num_processes=4 src/BiVLC_Generation/BiVLC_img_generation.py
 ```
 **Note:** We have used 4 GPUs for the execution, if you want to use a different number modify --num_processes= number of GPUs.
@@ -231,7 +239,7 @@ accelerate launch --num_processes=4 src/BiVLC_Generation/BiVLC_img_generation.py
 
 To create TROHN-Text we have used the COCO 2017 train captions, the LLM OpenChat 3.5-0106 and the templates provided by Sugarcrepe. We have created a negative caption for the proposed subcategories in SugarCrepe for each of the COCO 2017 train captions.
 
-```
+```python
 python src/Training_data/TROHN_Text/TROHN_Text_generation.py
 ```
 
@@ -239,14 +247,14 @@ python src/Training_data/TROHN_Text/TROHN_Text_generation.py
 
 To create TROHN-Img we used the negative captions generated for TROHN-Text. As image generation requires a lot of computational power and time, we filtered the negative captions based on plausibility and linguistic acceptability scores to obtain the best ones.
 
-```
+```python
 python src/Training_data/TROHN_Img/TROHN_Img_scoring.py
 python src/Training_data/TROHN_Img/TROHN_Img_best_selection.py
 ```
 
 Once we have the best captions, we generate an image for each caption with the SD-XL model.
 
-```
+```python
 accelerate launch --num_processes=6 src/Training_data/TROHN_Img/TROHN_Img_generation.py
 ```
 **Note:** We have used 6 GPUs for the execution, if you want to use a different number modify --num_processes= number of GPUs.
@@ -255,9 +263,9 @@ accelerate launch --num_processes=6 src/Training_data/TROHN_Img/TROHN_Img_genera
 
 We have fine-tuned 3 CLIP models with different data, COCO 2017 train, TROHN-Text and TROHN-Img. 
 
-```
+```python
 python src/CLIP_fine_tuning/CLIP_fine_tuning.py \
---dataset 'COCO' --run_name CLIP_COCO
+--dataset 'COCO' --run_name 'CLIP_COCO'
 ```
 **Note:** In the above code, we fine-tuned CLIP with the COCO 2017 training dataset, change --dataset to **'TROHN-Text'** or **'TROHN-Img'** for the other two fine-tunings. Also, change --run_name to CLIP_TROHN-Text or CLIP_TROHN-Img to be able to identify the checkpoints correctly.
 
@@ -266,20 +274,20 @@ python src/CLIP_fine_tuning/CLIP_fine_tuning.py \
 #### Training
 We have trained natural vs synthetic image and text detectors.
 To train the text detector.
-```
+```python
 python src/Detectors/Detector_text_classifier.py \
 --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
 --run_name 'CLIP_TROHN-Img'
 ```
 To train the image detector.
-```
+```python
 python src/Detectors/Detector_img_classifier.py \
 --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
 --run_name 'CLIP_TROHN-Img'
 ```
 **Note:** To train with the baseline model encoders simply do not add the --model-checkpoint argument.
 
-```
+```python
 python src/Detectors/Detector_text_classifier.py \
 python src/Detectors/Detector_img_classifier.py \
 ```
@@ -287,7 +295,7 @@ python src/Detectors/Detector_img_classifier.py \
 #### Evaluate in BiVLC
 
 We evaluated the detectors in BiVLC.
-```
+```python
 python src/Detectors/Detector_evaluation_BiVLC.py \
 --image-checkpoint 'src/Detectors/classifier_ckpt/best_image_CLIP_TROHN-Img_0.pt' \
 --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_CLIP_TROHN-Img_6.pt' \
@@ -296,7 +304,7 @@ python src/Detectors/Detector_evaluation_BiVLC.py \
 
 **Note:** In the previous example we evaluated the model based on the CLIP_TROHN-Img encoders, to evaluate the detector with the baseline encoders change the image-checkpoint and text-checkpoint provides in the HuggingFace repository (See Download checkpoints section above).
 
-```
+```python
 python src/Detectors/Detector_evaluation_BiVLC.py \
 --image-checkpoint 'src/Detectors/classifier_ckpt/best_image_VIT-B-32_0.pt' \
 --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
@@ -306,7 +314,7 @@ python src/Detectors/Detector_evaluation_BiVLC.py \
 #### Evaluate in SugarCrepe
 
 We evaluated text detectors in SugarCrepe. To evaluate detector CLIP_TROHN-Img.
-```
+```python
 python src/Detectors/Detector_evaluation_SugarCrepe.py \
 --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_CLIP_TROHN-Img_6.pt' \
 --run_name 'CLIP_TROHN-Img'
@@ -314,7 +322,7 @@ python src/Detectors/Detector_evaluation_SugarCrepe.py \
 
 As when evaluating in BiVLC, to evaluate the detector with the baseline model encoders just change the text-checkpoint and the run_name.
 
-```
+```python
 python src/Detectors/Detector_evaluation_SugarCrepe.py \
 --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
 --run_name 'CLIP_baseline'
