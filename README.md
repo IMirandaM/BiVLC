@@ -54,7 +54,7 @@ Each instance has the following structure:
 ### Dataset statistics
 test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instances, 50% text-to-image and 50% image-to-text.
 
-<img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.png">
+<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.png">
 
 
 ### Source Data
@@ -62,7 +62,7 @@ test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instan
 - negative_caption is a text description generated from the COCO caption by SUGARCREPE.
   
 ### Dataset curation
-<img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Process.png">
+<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Process.png">
 
 Step 1 - Uniformly format positive and hard negative captions
 
@@ -73,7 +73,7 @@ Step 3 - Ask to human annotators to choose the best generated image
 Step 4 - Filter ambiguous instances
 
 ### More examples
-<img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/more_examples.png">
+<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/more_examples.png">
   
 ### Training Data
 If you need training and validation data, you can use the datasets proposed in the paper in the following links, [TROHN-Text](https://huggingface.co/datasets/imirandam/TROHN-Text) and [TORHN-Img](https://huggingface.co/datasets/imirandam/TROHN-Img).
