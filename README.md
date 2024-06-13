@@ -18,7 +18,9 @@ WORK IN PROGRESS!
 
 BiVLC is a benchmark for Bidirectional Vision-Language Compositionality evaluation. Each instance consists of two images and two captions. Using each of the images and captions as a base, a model is asked to select the pair that correctly represents the base versus the hard negative distractor with minor compositional changes. Thus, we can measure image-to-text and text-to-image retrieval with hard negative pairs. To obtain good results on the dataset, it is necessary that the model performs well in both directions for the same instance.
 
-<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Examples.png">
+<p align="center">
+  <img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Examples.png">
+</p>
 
 #### Dataset instances
 
@@ -54,7 +56,9 @@ Each instance has the following structure:
 ### Dataset statistics
 test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instances, 50% text-to-image and 50% image-to-text.
 
-<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.png">
+<p align="center">
+  <img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.png">
+</p>
 
 
 ### Source Data
@@ -62,7 +66,9 @@ test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instan
 - negative_caption is a text description generated from the COCO caption by SUGARCREPE.
   
 ### Dataset curation
-<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Process.png">
+<p align="center">
+  <img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Process.png">
+</p>
 
 Step 1 - Uniformly format positive and hard negative captions
 
@@ -73,8 +79,11 @@ Step 3 - Ask to human annotators to choose the best generated image
 Step 4 - Filter ambiguous instances
 
 ### More examples
-<img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/more_examples.png">
-  
+
+<p align="center">
+  <img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/more_examples.png">
+</p>
+
 ### Training Data
 If you need training and validation data, you can use the datasets proposed in the paper in the following links, [TROHN-Text](https://huggingface.co/datasets/imirandam/TROHN-Text) and [TORHN-Img](https://huggingface.co/datasets/imirandam/TROHN-Img).
 
