@@ -89,6 +89,9 @@ If you need training and validation data, you can use the datasets proposed in t
 
 ## Results
 
+<p align="center">
+  <img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/main_results.PNG">
+</p>
 
 ## Findings
 
