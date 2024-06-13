@@ -92,10 +92,11 @@ If you need training and validation data, you can use the datasets proposed in t
 ## Code Structure
 
 ```
+.
 ├── source_data                               # Directory for source data
 │   ├── COCO_2017                             # Folder to save COCO 2017
-│   ├── SugarCrepe                            # Folder to save SugarCrepe
-│   │   └── concat_SugarCrepe.py              # SugarCrepe 7 json files into 1 csv
+│   └── SugarCrepe                            # Folder to save SugarCrepe
+│      └── concat_SugarCrepe.py              # SugarCrepe 7 json files into 1 csv
 ├── src                                       # Data generation and training code
 │   ├── BiVLC_Generation                      # BiVLC data generation
 │   │   ├── imgs                              # Folder to save the generated imgs
@@ -105,25 +106,25 @@ If you need training and validation data, you can use the datasets proposed in t
 │   │   │   ├── data                          # Folder to save generated negative captions
 │   │   │   └── TROHN_Text_generation.py      # Negative caption generation 
 │   │   └── TROHN-Img                         # TROHN-Img data generation
-│   │   │   ├── data                          # Folder to save the scored negative captions
-│   │   │   ├── imgs                          # Folder to save generated negative images
-│   │   │   ├── adversarial_refine.py         # Adversarial refinement from SugarCrepe
-│   │   │   ├── TROHN_Img_scoring.py          # Scoring TROHN-Text negative captions
-│   │   │   ├── TROHN_Img_best_selection.py   # Selecting best negative captions
-│   │   │   └── TROHN_Img_generation.py       # Image generation
+│   │       ├── data                          # Folder to save the scored negative captions
+│   │       ├── imgs                          # Folder to save generated negative images
+│   │       ├── adversarial_refine.py         # Adversarial refinement from SugarCrepe
+│   │       ├── TROHN_Img_scoring.py          # Scoring TROHN-Text negative captions
+│   │       ├── TROHN_Img_best_selection.py   # Selecting best negative captions
+│   │       └── TROHN_Img_generation.py       # Image generation
 │   ├── CLIP_fine_tuning                      # CLIP fine-tuning code and ckpts
 │   │   ├── ckpt                              # Folder to save the CLIP Checkpoints
 │   │   ├── CLIP_fine_tuning.py               # CLIP fine-tuning
 │   │   ├── CLIP_utils.py                     # load model, load data, evaluations
 │   │   └── scheduler.py                      # Cosine scheduler from OpenCLIP
-│   ├── Detectors                             # Detectors training and evaluation
-│   │   ├── results                           # Detector results
-│   │   ├── classifier_ckpt                   # Folder to save the classifier checkpoints
-│   │   ├── Detector_img_classifier.py        # Training img detector
-│   │   ├── Detector_text_classifier.py       # Training text detector
-│   │   ├── Detector_evaluation_BiVLC.py      # BiVLC detector evaluation
-│   │   ├── Detector_evaluation_SugarCrepe.py # SugarCrepe detector evaluation
-│   │   └── Detector_utils.py                 # load model, load data
+│   └── Detectors                             # Detectors training and evaluation
+│       ├── results                           # Detector results
+│       ├── classifier_ckpt                   # Folder to save the classifier checkpoints
+│       ├── Detector_img_classifier.py        # Training img detector
+│       ├── Detector_text_classifier.py       # Training text detector
+│       ├── Detector_evaluation_BiVLC.py      # BiVLC detector evaluation
+│       ├── Detector_evaluation_SugarCrepe.py # SugarCrepe detector evaluation
+│       └── Detector_utils.py                 # load model, load data
 ├── main_evaluation_BiVLC.py                  # Main evaluation 
 ├── evaluation_SugarCrepe.py                  # SugarCrepe evaluation
 ├── results                                   # BiVLC and SugarCrepe results
@@ -161,9 +162,9 @@ Resulting in:
 ```
 ├── source_data                               
 │   └── COCO_2017                              
-│   │   ├── captions_train2017.json           
-│   │   ├── train2017
-│   │   └── val2017
+│       ├── captions_train2017.json           
+│       ├── train2017
+│       └── val2017
 ```
 
 #### SugarCrepe
@@ -193,13 +194,20 @@ We have trained two detectors. Download the best_image and best_text .pt files f
 1. [CLIP_Detector](https://huggingface.co/imirandam/CLIP_Detector/tree/main)
 2. [CLIP_TROHN-Img_Detector](https://huggingface.co/imirandam/CLIP_TROHN-Img_Detector/tree/main)
 
-**NOTE:** Alternatively you can download the checkpoints using HuggingFace-hub:
+**NOTE:** Alternatively you can download the checkpoints using HuggingFace-hub. For example:
 
 ```python
 from huggingface_hub import hf_hub_download
 
 hf_hub_download(repo_id="imirandam/CLIP_COCO", filename="best_CLIP_COCO_9.pt", local_dir = "./src/CLIP_fine_tuning/ckpt")
 ```
+
+**repo_id** = HuggingFace repository
+
+**filename** = checkpoint_name.pt
+
+**local_dir** = directory to save the checkpoint
+
 
 ## Evaluation
 
