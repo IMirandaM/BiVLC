@@ -27,7 +27,7 @@ BiVLC is a benchmark for Bidirectional Vision-Language Compositionality evaluati
 Each instance of the dataset consists of six fields:
 * image: COCO 2017 validation image.
 * caption: COCO 2017 validation text describing the COCO image.
-* negative_caption: Negative caption generated from the COCO 2017 validation text description by SUGARCREPE.
+* negative_caption: Negative caption generated from the COCO 2017 validation text description by SugarCrepe.
 * negative_image: Negative image generated from the negative caption by BiVLC.
 * type: Category of the negative instances: Replace, Swap or Add.
 * subtype: Subcategory of the negative instances: Object, Attribute or Relation.
@@ -63,7 +63,7 @@ test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instan
 
 ### Source Data
 - image and caption are from COCO 2017 validation split.
-- negative_caption is a text description generated from the COCO caption by SUGARCREPE.
+- negative_caption is a text description generated from the COCO caption by SugarCrepe.
   
 ### Dataset curation
 <p align="center">
@@ -88,6 +88,13 @@ Step 4 - Filter ambiguous instances
 If you need training and validation data, you can use the datasets proposed in the paper in the following links, [TROHN-Text](https://huggingface.co/datasets/imirandam/TROHN-Text) and [TORHN-Img](https://huggingface.co/datasets/imirandam/TROHN-Img).
 
 ## Results
+
+
+## Findings
+
+* Contrary to humans, current models underperform on text-to-image retrieval.
+* The gap to humans is bigger in BiVLC than in SugarCrepe.
+* SugarCrepe and BIVLC performance are not correlated.
 
 ## Code Structure
 
