@@ -19,7 +19,7 @@ WORK IN PROGRESS!
 BiVLC is a benchmark for Bidirectional Vision-Language Compositionality evaluation. Each instance consists of two images and two captions. Using each of the images and captions as a base, a model is asked to select the pair that correctly represents the base versus the hard negative distractor with minor compositional changes. Thus, we can measure image-to-text and text-to-image retrieval with hard negative pairs. To obtain good results on the dataset, it is necessary that the model performs well in both directions for the same instance.
 
 <p align="center">
-  <img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Examples.png">
+  <img width="1200" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Examples.svg">
 </p>
 
 #### Dataset instances
@@ -57,7 +57,7 @@ Each instance has the following structure:
 test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instances, 50% text-to-image and 50% image-to-text.
 
 <p align="center">
-  <img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.svg">
+  <img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Comb-3.svg">
 </p>
 
 
@@ -67,7 +67,7 @@ test: 2,933 instances formed by 2 images and 2 captions. 11,732 retrieval instan
   
 ### Dataset curation
 <p align="center">
-  <img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Process.png">
+  <img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/BiVLC-Process.svg">
 </p>
 
 Step 1 - Uniformly format positive and hard negative captions
@@ -81,7 +81,7 @@ Step 4 - Filter ambiguous instances
 ### More examples
 
 <p align="center">
-  <img width="900" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/more_examples.png">
+  <img width="1200" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/more_examples.svg">
 </p>
 
 ### Training Data
