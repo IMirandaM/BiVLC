@@ -189,7 +189,7 @@ We have trained two detectors. Download the best_image and best_text .pt files f
 ```python
 from huggingface_hub import hf_hub_download
 
-hf_hub_download(repo_id="imirandam/CLIP_COCO", filename="best_CLIP_COCO_9.pt", local_dir = "./ckpt")
+hf_hub_download(repo_id="imirandam/CLIP_COCO", filename="best_CLIP_COCO_9.pt", local_dir = "./src/CLIP_fine_tuning/ckpt")
 ```
 
 ## Evaluation
