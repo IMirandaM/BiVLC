@@ -2,7 +2,7 @@
 
 <p align="center">
    <a href="https://imirandam.github.io/BiVLC_project_page"> Project Page </a> |
-   <a href=""> Paper </a> |
+   <a href="https://arxiv.org/abs/2406.09952"> Paper </a> |
    <a href="https://huggingface.co/collections/imirandam/bivlc-665f496b7cf372c7a06dc57c"> BiVLC Collection </a> |
    <a href="https://huggingface.co/datasets/imirandam/BiVLC"> BiVLC Dataset </a> |
    <a href="https://huggingface.co/datasets/imirandam/TROHN-Text"> TROHN-Text Dataset </a> |
