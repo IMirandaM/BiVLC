@@ -361,9 +361,10 @@ See the [LICENSE](./LICENSE) file for details about the license under which code
 ## Citation
 If you find this repository useful in your research, please consider giving a star :star: and a citation
 ```
-@article{,
-  title={},
-  author={},
-  journal={},
-  year={2024}
-}
+@misc{miranda2024bivlc,
+      title={BiVLC: Extending Vision-Language Compositionality Evaluation with Text-to-Image Retrieval}, 
+      author={Imanol Miranda and Ander Salaberria and Eneko Agirre and Gorka Azkune},
+      year={2024},
+      eprint={2406.09952},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
