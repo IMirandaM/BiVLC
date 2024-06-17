@@ -255,7 +255,7 @@ The data generation is divided into two parts, on the one hand the generation of
 
 #### BiVLC
 
-To create BiVLC we relied on SugarCrepe negative captions and created 4 images for each caption with SD-XL model. Then, through two phases of crowdsourcing, we kept the best images (see dataset curation section).
+To create BiVLC we relied on SugarCrepe negative captions and created 4 images for each caption with SDXL-DPO model. Then, through two phases of crowdsourcing, we kept the best images (see dataset curation section).
 
 ```python
 accelerate launch --num_processes=4 src/BiVLC_Generation/BiVLC_img_generation.py
@@ -279,7 +279,7 @@ python src/Training_data/TROHN_Img/TROHN_Img_scoring.py
 python src/Training_data/TROHN_Img/TROHN_Img_best_selection.py
 ```
 
-Once we have the best captions, we generate an image for each caption with the SD-XL model.
+Once we have the best captions, we generate an image for each caption with the SDXL-DPO model.
 
 ```python
 accelerate launch --num_processes=6 src/Training_data/TROHN_Img/TROHN_Img_generation.py
