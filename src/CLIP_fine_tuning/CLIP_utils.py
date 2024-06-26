@@ -149,31 +149,31 @@ def evaluate_BiVLC(args, batch, model, tokenizer):
     sim_C1_I0 = torch.diagonal(sim_C1_I0)
     sim_C1_I1 = torch.diagonal(sim_C1_I1)
 
-    l_text_score = []
-    l_image_score = []
+    l_I2T = []
+    l_T2I = []
     l_group_score = []
-    l_text_score_i0 = []
-    l_text_score_i1 = []
-    l_image_score_c0 = []
-    l_image_score_c1 = []
+    l_Ipos_2T = []
+    l_Ineg_2T = []
+    l_Tpos_2I = []
+    l_Tneg_2I = []
 
     for s_C0_I0,s_C0_I1, s_C1_I0, s_C1_I1 in zip(sim_C0_I0,sim_C0_I1, sim_C1_I0, sim_C1_I1):
-      text_score_i0 = s_C0_I0 > s_C1_I0
-      text_score_i1 = s_C1_I1 > s_C0_I1
-      image_score_c0 = s_C0_I0 > s_C0_I1 
-      image_score_c1 = s_C1_I1 > s_C1_I0
+      Ipos_2T = s_C0_I0 > s_C1_I0
+      Ineg_2T = s_C1_I1 > s_C0_I1
+      Tpos_2I = s_C0_I0 > s_C0_I1 
+      Tneg_2I = s_C1_I1 > s_C1_I0
 
-      text_score = text_score_i0 and text_score_i1
-      image_score = image_score_c0 and image_score_c1
-      group_score = text_score and image_score
+      I2T = Ipos_2T and Ineg_2T
+      T2I = Tpos_2I and Tneg_2I
+      group_score = I2T and T2I
 
-      l_text_score.append(text_score)
-      l_image_score.append(image_score)
+      l_I2T.append(I2T)
+      l_T2I.append(T2I)
       l_group_score.append(group_score)
 
-      l_text_score_i0.append(text_score_i0)
-      l_text_score_i1.append(text_score_i1)
-      l_image_score_c0.append(image_score_c0)
-      l_image_score_c1.append(image_score_c1)
+      l_Ipos_2T.append(Ipos_2T)
+      l_Ineg_2T.append(Ineg_2T)
+      l_Tpos_2I.append(Tpos_2I)
+      l_Tneg_2I.append(Tneg_2I)
 
-    return [l_text_score, l_image_score, l_group_score, l_text_score_i0, l_text_score_i1, l_image_score_c0, l_image_score_c1]
+    return [l_I2T, l_T2I, l_group_score, l_Ipos_2T, l_Ineg_2T, l_Tpos_2I, l_Tneg_2I]
