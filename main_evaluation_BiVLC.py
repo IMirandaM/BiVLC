@@ -62,37 +62,37 @@ if __name__ == '__main__':
     print(f'Evaluating {args.clip_model} fine-tuned in {args.run_name} for {len(data)} instances...')   
     # Evaluation
     model.eval() 
-    text_score = []
-    image_score = []
+    I2T = []
+    T2I = []
     group_score = []
     
-    text_score_i0 = []
-    text_score_i1 = []
-    image_score_c0 = []
-    image_score_c1 = []
+    Ipos_2T = []
+    Ineg_2T = []
+    Tpos_2I = []
+    Tneg_2I = []
 
     with torch.inference_mode():
         pbar = tqdm(test_dataloader)
         for batch in pbar:
-            text_s, image_s, group_s, text_s_i0, text_s_i1, image_s_c0, image_s_c1 = evaluate_BiVLC(args, batch, model, tokenizer)
-            text_score.extend(text_s)
-            image_score.extend(image_s)
+            I2T_s, T2I_s, group_s, Ipos_2T_s, Ineg_2T_s, Tpos_2I_s, Tneg_2I_s = evaluate_BiVLC(args, batch, model, tokenizer)
+            I2T.extend(I2T_s)
+            T2I.extend(T2I_s)
             group_score.extend(group_s)
-            text_score_i0.extend(text_s_i0)
-            text_score_i1.extend(text_s_i1)
-            image_score_c0.extend(image_s_c0)
-            image_score_c1.extend(image_s_c1) 
+            Ipos_2T.extend(Ipos_2T_s)
+            Ineg_2T.extend(Ineg_2T_s)
+            Tpos_2I.extend(Tpos_2I_s)
+            Tneg_2I.extend(Tneg_2I_s) 
                                
-    #wandb.log({'Text score': 100*(sum(text_score)/len(data)), 'Image score': 100*(sum(image_score)/len(data)), 'Group score': 100*(sum(group_score)/len(data)),'Text score_i0': 100*(sum(text_score_i0)/len(data)), 'Text score_i1': 100*(sum(text_score_i1)/len(data)), 'Image score_c0': 100*(sum(image_score_c0)/len(data)), 'Image score_c1': 100*(sum(image_score_c1)/len(data))})        
-    print(f'{args.run_name} checkpoint OVERALL scores:   Text score: {100*(sum(text_score)/len(data))}, Image score: {100*(sum(image_score)/len(data))}, Group score: {100*(sum(group_score)/len(data))}, Text score_i0: {100*(sum(text_score_i0)/len(data))}, Text score_i1: {100*(sum(text_score_i1)/len(data))}, Image score_c0: {100*(sum(image_score_c0)/len(data))}, Image score_c1: {100*(sum(image_score_c1)/len(data))}')
+    #wandb.log({'I2T': 100*(sum(I2T)/len(data)), 'T2I': 100*(sum(T2I)/len(data)), 'Group score': 100*(sum(group_score)/len(data)),'Ipos_2T': 100*(sum(Ipos_2T)/len(data)), 'Ineg_2T': 100*(sum(Ineg_2T)/len(data)), 'Tpos_2I': 100*(sum(Tpos_2I)/len(data)), 'Tneg_2I': 100*(sum(Tneg_2I)/len(data))})        
+    print(f'{args.run_name} checkpoint OVERALL scores:   I2T: {100*(sum(I2T)/len(data))}, T2I: {100*(sum(T2I)/len(data))}, Group score: {100*(sum(group_score)/len(data))}, Ipos_2T: {100*(sum(Ipos_2T)/len(data))}, Ineg_2T: {100*(sum(Ineg_2T)/len(data))}, Tpos_2I: {100*(sum(Tpos_2I)/len(data))}, Tneg_2I: {100*(sum(Tneg_2I)/len(data))}')
 
     df = pd.DataFrame(data)
-    df['text_score_i0'] = [tensor.item() for tensor in text_score_i0]
-    df['text_score_i1'] = [tensor.item() for tensor in text_score_i1]
-    df['image_score_c0'] = [tensor.item() for tensor in image_score_c0]
-    df['image_score_c1'] = [tensor.item() for tensor in image_score_c1]
-    df['text_score'] = [tensor.item() for tensor in text_score]
-    df['image_score'] = [tensor.item() for tensor in image_score]
+    df['Ipos_2T'] = [tensor.item() for tensor in Ipos_2T]
+    df['Ineg_2T'] = [tensor.item() for tensor in Ineg_2T]
+    df['Tpos_2I'] = [tensor.item() for tensor in Tpos_2I]
+    df['Tneg_2I'] = [tensor.item() for tensor in Tneg_2I]
+    df['I2T'] = [tensor.item() for tensor in I2T]
+    df['T2I'] = [tensor.item() for tensor in T2I]
     df['group_score'] = [tensor.item() for tensor in group_score]
     
     df.to_csv(os.path.join(args.save_path, f'BiVLC_{args.run_name}.csv'), index = False, quotechar='"', quoting=csv.QUOTE_ALL)
@@ -101,6 +101,6 @@ if __name__ == '__main__':
     df_swap = df[df['type'] == 'swap']
     df_add = df[df['type'] == 'add']
 
-    print(f"{args.run_name} checkpoint REPLACE ({len(df_replace)}) scores:   Text score: {100*(sum(df_replace['text_score'])/len(df_replace))}, Image score: {100*(sum(df_replace['image_score'])/len(df_replace))}, Group score: {100*(sum(df_replace['group_score'])/len(df_replace))}, Text score_i0: {100*(sum(df_replace['text_score_i0'])/len(df_replace))}, Text score_i1: {100*(sum(df_replace['text_score_i1'])/len(df_replace))}, Image score_c0: {100*(sum(df_replace['image_score_c0'])/len(df_replace))}, Image score_c1: {100*(sum(df_replace['image_score_c1'])/len(df_replace))}")
-    print(f"{args.run_name} checkpoint SWAP ({len(df_swap)}) scores:   Text score: {100*(sum(df_swap['text_score'])/len(df_swap))}, Image score: {100*(sum(df_swap['image_score'])/len(df_swap))}, Group score: {100*(sum(df_swap['group_score'])/len(df_swap))}, Text score_i0: {100*(sum(df_swap['text_score_i0'])/len(df_swap))}, Text score_i1: {100*(sum(df_swap['text_score_i1'])/len(df_swap))}, Image score_c0: {100*(sum(df_swap['image_score_c0'])/len(df_swap))}, Image score_c1: {100*(sum(df_swap['image_score_c1'])/len(df_swap))}")
-    print(f"{args.run_name} checkpoint ADD ({len(df_add)}) scores:   Text score: {100*(sum(df_add['text_score'])/len(df_add))}, Image score: {100*(sum(df_add['image_score'])/len(df_add))}, Group score: {100*(sum(df_add['group_score'])/len(df_add))}, Text score_i0: {100*(sum(df_add['text_score_i0'])/len(df_add))}, Text score_i1: {100*(sum(df_add['text_score_i1'])/len(df_add))}, Image score_c0: {100*(sum(df_add['image_score_c0'])/len(df_add))}, Image score_c1: {100*(sum(df_add['image_score_c1'])/len(df_add))}")
+    print(f"{args.run_name} checkpoint REPLACE ({len(df_replace)}) scores:   I2T: {100*(sum(df_replace['I2T'])/len(df_replace))}, T2I: {100*(sum(df_replace['T2I'])/len(df_replace))}, Group score: {100*(sum(df_replace['group_score'])/len(df_replace))}, Ipos_2T: {100*(sum(df_replace['Ipos_2T'])/len(df_replace))}, Ineg_2T: {100*(sum(df_replace['Ineg_2T'])/len(df_replace))}, Tpos_2I: {100*(sum(df_replace['Tpos_2I'])/len(df_replace))}, Tneg_2I: {100*(sum(df_replace['Tneg_2I'])/len(df_replace))}")
+    print(f"{args.run_name} checkpoint SWAP ({len(df_swap)}) scores:   I2T: {100*(sum(df_swap['I2T'])/len(df_swap))}, T2I: {100*(sum(df_swap['T2I'])/len(df_swap))}, Group score: {100*(sum(df_swap['group_score'])/len(df_swap))}, Ipos_2T: {100*(sum(df_swap['Ipos_2T'])/len(df_swap))}, Ineg_2T: {100*(sum(df_swap['Ineg_2T'])/len(df_swap))}, Tpos_2I: {100*(sum(df_swap['Tpos_2I'])/len(df_swap))}, Tneg_2I: {100*(sum(df_swap['Tneg_2I'])/len(df_swap))}")
+    print(f"{args.run_name} checkpoint ADD ({len(df_add)}) scores:   I2T: {100*(sum(df_add['I2T'])/len(df_add))}, T2I: {100*(sum(df_add['T2I'])/len(df_add))}, Group score: {100*(sum(df_add['group_score'])/len(df_add))}, Ipos_2T: {100*(sum(df_add['Ipos_2T'])/len(df_add))}, Ineg_2T: {100*(sum(df_add['Ineg_2T'])/len(df_add))}, Tpos_2I: {100*(sum(df_add['Tpos_2I'])/len(df_add))}, Tneg_2I: {100*(sum(df_add['Tneg_2I'])/len(df_add))}")
