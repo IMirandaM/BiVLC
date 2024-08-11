@@ -33,7 +33,7 @@ def get_inputs(prompts):
     guidance_scale=5
     return {"prompt": prompt,  "num_images_per_prompt": num_images , "guidance_scale" : guidance_scale} 
 
-# Train
+# Read SugarCrepe
 df = pd.read_csv('./source_data/SugarCrepe/test_SugarCrepe.csv', usecols=["filename","caption","negative_caption","type","subtype"])
 print(len(df))
 df["prompt"] = (df["negative_caption"].str.replace(".", "")) + ", high resolution, professional, 4k, highly detailed" 
