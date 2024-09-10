@@ -150,10 +150,10 @@ git clone https://github.com/IMirandaM/BiVLC.git
 
 cd BiVLC
 
-python -m venv BiVLC              # Create env
-source BiVLC/bin/activate         # Load env
+python3 -m venv BiVLC              # Create env
+source BiVLC/bin/activate.csh      # Load env
 
-pip install -r requirements.txt   # Install dependencies
+pip3 install -r requirements.txt   # Install dependencies
 ```
 
 ### Download source data
