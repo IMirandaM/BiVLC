@@ -66,8 +66,9 @@ df['hn_img_2'] = df['hn_img_0'].astype(str) + '_2.jpg'
 df['hn_img_3'] = df['hn_img_0'].astype(str) + '_3.jpg'
 df['hn_img_0'] = df['hn_img_0'].astype(str) + '_0.jpg'
 df = df.drop(['prompt'], axis=1)
-df['caption'] = df['caption'].apply(lambda x: (x.strip().capitalize()) +'.' if x[-1] != '.' else x.strip().capitalize())
-df['negative_caption'] = df['negative_caption'].apply(lambda x: (x.strip().capitalize()) +'.' if x[-1] != '.' else x.strip().capitalize())
+df['caption'] = df['caption'].apply(lambda x: (x.capitalize() if x.isupper() else x[:1].upper() + x[1:].strip()) + '.' if x[-1] != '.' else (x.capitalize() if x.isupper() else x[:1].upper() + x[1:].strip()))
+df['negative_caption'] = df['negative_caption'].apply(lambda x: (x.capitalize() if x.isupper() else x[:1].upper() + x[1:].strip()) + '.' if x[-1] != '.' else (x.capitalize() if x.isupper() else x[:1].upper() + x[1:].strip()))
+
 
 #Test
 df.to_csv('./src/BiVLC_Generation/BiVLC_negative_imgs.csv', index = False, quotechar='"', quoting=csv.QUOTE_ALL)
