@@ -106,7 +106,7 @@ If you need training and validation data, you can use the datasets proposed in t
 ├── source_data                               # Directory for source data
 │   ├── COCO_2017                             # Folder to save COCO 2017
 │   └── SugarCrepe                            # Folder to save SugarCrepe
-│      └── concat_SugarCrepe.py              # SugarCrepe 7 json files into 1 csv
+│      └── concat_SugarCrepe.py               # SugarCrepe 7 json files into 1 csv
 ├── src                                       # Data generation and training code
 │   ├── BiVLC_Generation                      # BiVLC data generation
 │   │   ├── imgs                              # Folder to save the generated imgs
