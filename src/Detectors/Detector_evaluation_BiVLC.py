@@ -24,7 +24,7 @@ class CLIP_image_classifier(torch.nn.Module):
     def __init__(self, encoder_model, n_output):
         super().__init__()
         
-        self.image_encoder = list(encoder_model.children())[0]
+        self.image_encoder = encoder_model.visual # list(encoder_model.children())[0]
         self.classifier = torch.nn.Linear(in_features=512, 
                     out_features=n_output,
                     bias=True)
