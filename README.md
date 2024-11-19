@@ -151,7 +151,7 @@ git clone https://github.com/IMirandaM/BiVLC.git
 cd BiVLC
 
 python3 -m venv BiVLC              # Create env
-source BiVLC/bin/activate.csh      # Load env
+source BiVLC/bin/activate          # Load env
 
 pip3 install -r requirements.txt   # Install dependencies
 ```
