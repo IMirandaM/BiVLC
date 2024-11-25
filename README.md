@@ -238,6 +238,8 @@ This section will show how to reproduce evaluations in BiVLC and SugarCrepe data
 
 ### Main evaluation BiVLC
 
+#### Contrastives
+
 ```python
 python main_evaluation_BiVLC.py \
 --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
