@@ -347,7 +347,7 @@ We have fine-tuned 3 CLIP models with different data, COCO 2017 train, TROHN-Tex
 
 ```python
 python src/CLIP_fine_tuning/CLIP_fine_tuning.py \
---dataset 'COCO' --run_name 'CLIP_COCO'
+   --dataset 'COCO' --run_name 'CLIP_COCO'
 ```
 **Note:** In the above code, we fine-tuned CLIP with the COCO 2017 training dataset, change --dataset to **'TROHN-Text'** or **'TROHN-Img'** for the other two fine-tunings. Also, change --run_name to CLIP_TROHN-Text or CLIP_TROHN-Img to be able to identify the checkpoints correctly.
 
@@ -358,14 +358,14 @@ We have trained natural vs synthetic image and text detectors.
 To train the text detector.
 ```python
 python src/Detectors/Detector_text_classifier.py \
---model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
---run_name 'CLIP_TROHN-Img'
+   --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
+   --run_name 'CLIP_TROHN-Img'
 ```
 To train the image detector.
 ```python
 python src/Detectors/Detector_img_classifier.py \
---model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
---run_name 'CLIP_TROHN-Img'
+   --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
+   --run_name 'CLIP_TROHN-Img'
 ```
 **Note:** To train with the baseline model encoders simply do not add the --model-checkpoint argument.
 
@@ -379,18 +379,18 @@ python src/Detectors/Detector_img_classifier.py \
 We evaluated the detectors in BiVLC.
 ```python
 python src/Detectors/Detector_evaluation_BiVLC.py \
---image-checkpoint 'src/Detectors/classifier_ckpt/best_image_CLIP_TROHN-Img_0.pt' \
---text-checkpoint 'src/Detectors/classifier_ckpt/best_text_CLIP_TROHN-Img_6.pt' \
---run_name 'CLIP_TROHN-Img'
+   --image-checkpoint 'src/Detectors/classifier_ckpt/best_image_CLIP_TROHN-Img_0.pt' \
+   --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_CLIP_TROHN-Img_6.pt' \
+   --run_name 'CLIP_TROHN-Img'
 ```
 
 **Note:** In the previous example we evaluated the model based on the CLIP_TROHN-Img encoders, to evaluate the detector with the baseline encoders change the image-checkpoint and text-checkpoint provides in the HuggingFace repository (See Download checkpoints section above).
 
 ```python
 python src/Detectors/Detector_evaluation_BiVLC.py \
---image-checkpoint 'src/Detectors/classifier_ckpt/best_image_VIT-B-32_0.pt' \
---text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
---run_name 'CLIP_baseline'
+   --image-checkpoint 'src/Detectors/classifier_ckpt/best_image_VIT-B-32_0.pt' \
+   --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
+   --run_name 'CLIP_baseline'
 ```
 
 #### Evaluate in SugarCrepe
@@ -398,16 +398,16 @@ python src/Detectors/Detector_evaluation_BiVLC.py \
 We evaluated text detectors in SugarCrepe. To evaluate detector CLIP_TROHN-Img.
 ```python
 python src/Detectors/Detector_evaluation_SugarCrepe.py \
---text-checkpoint 'src/Detectors/classifier_ckpt/best_text_CLIP_TROHN-Img_6.pt' \
---run_name 'CLIP_TROHN-Img'
+   --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_CLIP_TROHN-Img_6.pt' \
+   --run_name 'CLIP_TROHN-Img'
 ```
 
 As when evaluating in BiVLC, to evaluate the detector with the baseline model encoders just change the text-checkpoint and the run_name.
 
 ```python
 python src/Detectors/Detector_evaluation_SugarCrepe.py \
---text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
---run_name 'CLIP_baseline'
+   --text-checkpoint 'src/Detectors/classifier_ckpt/best_text_VIT-B-32_7.pt' \
+   --run_name 'CLIP_baseline'
 ```
 
 ## License
