@@ -260,9 +260,9 @@ To evaluate this model you will need to prepare the environment as described in 
 
 ```python
 python OSCapPa_BiVLC.py \
-   --local_dir Define the folder where you want to save the model
+   --local_dir 'Define path'
 ```
-
+**Note** In --local_dir Define the folder where you want to save the model
 
 ##### VQA-Score models
 To evaluate this model you will need to prepare the environment as described in the official repository [t2v_metrics](https://github.com/linzhiqiu/t2v_metrics), and also install the datasets library. 
@@ -288,8 +288,9 @@ To evaluate this model you will need to prepare the environment as described in 
 
 ```python
 python OSCapPa_SugarCrepe.py \
-   --local_dir Define the folder where you want to save the model
+   --local_dir 'Define path'
 ```
+**Note** In --local_dir Define the folder where you want to save the model
 
 ##### VQA-Score models
 To evaluate this model you will need to prepare the environment as described in the official repository [t2v_metrics](https://github.com/linzhiqiu/t2v_metrics). 
