@@ -250,8 +250,28 @@ python main_evaluation_BiVLC.py \
 
 We provide the checkpoints of our models in HuggingFace repositories (See Download checkpoints section above), for [NegCLIP](https://github.com/mertyg/vision-language-models-are-bows) and [GNM](https://github.com/ugorsahin/Generative-Negative-Mining) models you should download their checkpoints directly from their official repositories. To evalute the baseline model simply do not add the --model-checkpoint argument.
 
-### Evaluate in SugarCrepe
+#### Generatives
+##### Open-source CapPa
+To evaluate this model you will need to prepare the environment as described in the official reposiroty [CLIP-JAX](https://github.com/borisdayma/clip-jax/tree/main?tab=readme-ov-file)), and also install the datasets library.
 
+```python
+python main_evaluation_BiVLC.py \
+--model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
+--run_name 'CLIP_TROHN-Img'
+```
+
+
+##### VQA-Score models
+To evaluate this model you will need to prepare the environment as described in the official reposiroty [t2v_metrics](https://github.com/borisdayma/clip-jax/tree/main?tab=readme-ov-file](https://github.com/linzhiqiu/t2v_metrics))), and also install the datasets library. 
+```python
+python VQAScore_BiVLC.py \
+--model 'clip-flant5-xxl'
+```
+**Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument 'clip-flant5-xl' to evaluate the XL model.
+
+
+### Evaluate in SugarCrepe
+#### Contrastives
 To evaluate the different models in SugarCrepe change the model checkpoints and run names as in the BiVLC evaluation.
 
 ```python
@@ -259,6 +279,16 @@ python evaluation_SugarCrepe.py \
 --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
 --run_name 'CLIP_TROHN-Img'
 ```
+#### Generatives
+##### Open-source CapPa
+
+##### VQA-Score models
+To evaluate this model you will need to prepare the environment as described in the official repository [t2v_metrics](https://github.com/borisdayma/clip-jax/tree/main?tab=readme-ov-file](https://github.com/linzhiqiu/t2v_metrics))). 
+```python
+python VQAScore_SugarCrepe.py \
+--model 'clip-flant5-xxl'
+```
+**Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument 'clip-flant5-xl' to evaluate the XL model.
 
 ## Instructions for replicating data generation, CLIP fine-tuning and Detectors
 
