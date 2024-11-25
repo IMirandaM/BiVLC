@@ -89,6 +89,8 @@ If you need training and validation data, you can use the datasets proposed in t
 
 ## Results
 
+Results for SOTA models on SUGARCREPE and BIVLC. For the later, we provide the three metrics I2T, T2I and Group score. Human and random performance are also depicted. Bold for the best of each model family (contrastive and generative).
+
 <p align="center">
   <img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/main_results.PNG">
 </p>
@@ -98,6 +100,17 @@ If you need training and validation data, you can use the datasets proposed in t
 * Contrary to humans, current models underperform on text-to-image retrieval.
 * The gap to humans is bigger in BiVLC than in SugarCrepe.
 * SugarCrepe and BIVLC performance are not correlated.
+
+## Exploring training strategies for vision-language compositionality
+We propose two new models:
+1. <b>CLIP<sub>TROHN-TEXT</sub></b> using hard negative texts.
+2. <b>CLIP<sub>TROHN-IMG</sub></b> using hard negative texts and images.
+
+<p align="center">
+<img width="600" src="https://raw.githubusercontent.com/IMirandaM/BiVLC/main/misc/training_str.PNG">
+</p>
+
+<b>Finding:</b> Training with hard negative images can boost the performance of multimodal contrastive models.
 
 ## Code Structure
 
