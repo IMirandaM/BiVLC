@@ -267,7 +267,7 @@ To evaluate this model you will need to prepare the environment as described in 
 python VQAScore_BiVLC.py \
 --model 'clip-flant5-xxl'
 ```
-**Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument 'clip-flant5-xl' to evaluate the XL model.
+**Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument to 'clip-flant5-xl' to evaluate the XL model.
 
 
 ### Evaluate in SugarCrepe
@@ -288,7 +288,7 @@ To evaluate this model you will need to prepare the environment as described in 
 python VQAScore_SugarCrepe.py \
 --model 'clip-flant5-xxl'
 ```
-**Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument 'clip-flant5-xl' to evaluate the XL model.
+**Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument to 'clip-flant5-xl' to evaluate the XL model.
 
 ## Instructions for replicating data generation, CLIP fine-tuning and Detectors
 
