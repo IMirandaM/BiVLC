@@ -148,8 +148,12 @@ We propose two new models:
 │       ├── Detector_evaluation_BiVLC.py      # BiVLC detector evaluation
 │       ├── Detector_evaluation_SugarCrepe.py # SugarCrepe detector evaluation
 │       └── Detector_utils.py                 # load model, load data
-├── main_evaluation_BiVLC.py                  # Main evaluation 
-├── evaluation_SugarCrepe.py                  # SugarCrepe evaluation
+├── main_evaluation_BiVLC.py                  # Contrastive models main evaluation 
+├── evaluation_SugarCrepe.py                  # Contrastive models SugarCrepe evaluation
+├── VQAScore_BiVLC.py                         # VQAScore models main evaluation 
+├── VQAScore_SugarCrepe.py                    # VQAScore models SugarCrepe evaluation
+├── OSCapPa_BiVLC.py                          # OSCapPa model main evaluation 
+├── OSCapPa_SugarCrepe.py                     # OSCapPa model SugarCrepe evaluation
 ├── results                                   # BiVLC and SugarCrepe results
 └── requirements.txt                          # List of libraries needed
 ```
@@ -242,8 +246,8 @@ This section will show how to reproduce evaluations in BiVLC and SugarCrepe data
 
 ```python
 python main_evaluation_BiVLC.py \
---model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
---run_name 'CLIP_TROHN-Img'
+   --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
+   --run_name 'CLIP_TROHN-Img'
 ```
 
 **Note:** In the above example we only evaluate CLIP_TROHN-Img, to evaluate any other model just change the --model-checkpoint argument and add a --run_name to identify it. 
@@ -255,9 +259,8 @@ We provide the checkpoints of our models in HuggingFace repositories (See Downlo
 To evaluate this model you will need to prepare the environment as described in the official repository [CLIP-JAX](https://github.com/borisdayma/clip-jax/tree/main?tab=readme-ov-file), and also install the datasets library.
 
 ```python
-python main_evaluation_BiVLC.py \
---model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
---run_name 'CLIP_TROHN-Img'
+python OSCapPa_BiVLC.py \
+   --local_dir Define the folder where you want to save the model
 ```
 
 
@@ -265,7 +268,7 @@ python main_evaluation_BiVLC.py \
 To evaluate this model you will need to prepare the environment as described in the official repository [t2v_metrics](https://github.com/linzhiqiu/t2v_metrics), and also install the datasets library. 
 ```python
 python VQAScore_BiVLC.py \
---model 'clip-flant5-xxl'
+   --model 'clip-flant5-xxl'
 ```
 **Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument to 'clip-flant5-xl' to evaluate the XL model.
 
@@ -276,17 +279,23 @@ To evaluate the different models in SugarCrepe change the model checkpoints and 
 
 ```python
 python evaluation_SugarCrepe.py \
---model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
---run_name 'CLIP_TROHN-Img'
+   --model-checkpoint 'src/CLIP_fine_tuning/ckpt/best_CLIP_TROHN-Img_9.pt' \
+   --run_name 'CLIP_TROHN-Img'
 ```
 #### Generatives
 ##### Open-source CapPa
+To evaluate this model you will need to prepare the environment as described in the official repository [CLIP-JAX](https://github.com/borisdayma/clip-jax/tree/main?tab=readme-ov-file).
+
+```python
+python OSCapPa_SugarCrepe.py \
+   --local_dir Define the folder where you want to save the model
+```
 
 ##### VQA-Score models
 To evaluate this model you will need to prepare the environment as described in the official repository [t2v_metrics](https://github.com/linzhiqiu/t2v_metrics). 
 ```python
 python VQAScore_SugarCrepe.py \
---model 'clip-flant5-xxl'
+   --model 'clip-flant5-xxl'
 ```
 **Note:** In the above example we evaluate clip-flant5-xxl, change the --model argument to 'clip-flant5-xl' to evaluate the XL model.
 
