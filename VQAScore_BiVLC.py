@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser.add_argument('--model', default="clip-flant5-xxl") #'clip-flant5-xxl' 'clip-flant5-xl'
     args = parser.parse_args()
     
-    img_path = '/gaueko0/users/imiranda014/Esperimentuak/SugarCrepe/t2v_metrics/img'
+    img_path = 'source_data/'
 
     print('Loading data...')
     data = load_dataset("imirandam/BiVLC", split = "test")
