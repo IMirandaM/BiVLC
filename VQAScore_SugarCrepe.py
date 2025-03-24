@@ -13,10 +13,10 @@ if __name__ == '__main__':
     parser.add_argument('--model', default="clip-flant5-xxl") #'clip-flant5-xxl' 'clip-flant5-xl'
     args = parser.parse_args()
 
-    img_path = '/gaueko0/users/imiranda014/GSCRATCH/Data/COCO/val2017'
+    img_path = 'source_data/COCO/val2017'
 
     print('Loading data...')
-    data = pd.read_csv('/gaueko0/users/imiranda014/Esperimentuak/SugarCrepe/t2v_metrics/test_SugarCrepe.csv')
+    data = pd.read_csv('source_data/SugarCrepe/test_SugarCrepe.csv')
     print('Data loaded!')
 
     model = args.model 
