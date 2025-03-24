@@ -125,7 +125,7 @@ if __name__ == '__main__':
 
     # download model
     model_name = "boris/cappa-large-patch16-256-jax"
-    local_dir = "source_data/cappa-large-patch16-256-jax"
+    local_dir = args.local_dir
     download_huggingface_model(model_name, local_dir)
 
     # load tokenizer
