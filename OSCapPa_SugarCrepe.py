@@ -119,13 +119,13 @@ if __name__ == '__main__':
 
     # load data
     print('Loading data...')
-    data = pd.read_csv('/gaueko0/users/imiranda014/Esperimentuak/SugarCrepe/t2v_metrics/test_SugarCrepe.csv')
+    data = pd.read_csv('source_data/SugarCrepe/test_SugarCrepe.csv')
     print('Data loaded!')
-    img_path = '/gaueko0/users/imiranda014/GSCRATCH/Data/COCO/val2017'
+    img_path = 'source_data/COCO/val2017'
 
     # download model
     model_name = "boris/cappa-large-patch16-256-jax"
-    local_dir = "/gaueko0/users/imiranda014/Esperimentuak/SugarCrepe/osCapPa/model/cappa-large-patch16-256-jax"
+    local_dir = "source_data/cappa-large-patch16-256-jax"
     download_huggingface_model(model_name, local_dir)
 
     # load tokenizer
